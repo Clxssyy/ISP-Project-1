@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment #1</title>
+    <script src="scripts.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="col">
+        <h2>Michael Connolly</h2>
+        <p>Browser Info: Chrome, cross-platform web browser developed by Google.</p>
+        <p>Date/Time Completed: 9/29/22</p>
+        <p>Current Date/Time: <span id="datetime"></span></p>
+        <a href="#Factorial-Calculator" onclick="calcprompt()">Calculator</a>
+        <a href="#Animated-Image">Image</a>
+        <br>
+        <iframe src="https://www.youtube.com/embed/m3yXpqiTKKI" width="320" height="240"></iframe>
+        <script>
+            function clock()
+            {
+                var date = new Date();
+                document.getElementById("datetime").innerHTML = date;
+
+                setTimeout(clock, 1000)
+            }
+
+            clock();
+        </script>
+    </div>
+    <div class="col" id="Factorial-Calculator">
+        <h3>Factorial Calculator</h3>
+        <p>Enter a positive number to get it's factorial!</p>
+        <input type="text" id="input" value="8">
+        <input type="button" id="enter" value="Enter" onclick="calc()">
+        <p>Result: <span id="result"></span></p>
+    </div>
+    <div id="Animated-Image">
+        <h3>Animated Image</h3>
+        <p>Click in the yellow box to move the picture around.</p>
+        <img id="picture" src="dog.jfif" width="50px" height="50px">
+    </div>
+    <script>
+        var movingthing = document.querySelector("#picture");
+        var bounds = document.querySelector("#Animated-Image");
+
+        bounds.addEventListener("click", changePos, false);
+
+        function changePos(e)
+        {
+            var originalPosition = getPosition(e.currentTarget);
+            var xPos = e.clientX - originalPosition.x - (movingthing.clientWidth / 2);
+            var yPos = e.clientY - originalPosition.y - (movingthing.clientHeight / 2);
+     
+                movingthing.style.left = xPos + "px";
+                movingthing.style.top = yPos + "px";
+        }
+
+        function getPosition(e) 
+        {
+            var xPos = 0;
+            var yPos = 0;
+ 
+            while (e) {
+                xPos += (e.offsetLeft + e.clientLeft);
+                yPos += (e.offsetTop + e.clientTop);
+                e = e.offsetParent;
+            }return {
+                x: xPos,
+                y: yPos
+            };
+        }
+    </script>
+</body>
+</html>
